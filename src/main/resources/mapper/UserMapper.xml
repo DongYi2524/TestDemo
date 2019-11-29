@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wcl.demo.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wcl.demo.mondel.User">
+    <id column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="PASS_WORD" jdbcType="VARCHAR" property="passWord" />
+    <result column="USER_CREAT_BY" jdbcType="INTEGER" property="userCreatBy" />
+    <result column="USER_CREAT_TIME" jdbcType="TIMESTAMP" property="userCreatTime" />
+    <result column="USER_UPDATE_BY" jdbcType="INTEGER" property="userUpdateBy" />
+    <result column="USER_UPDATE_TIME" jdbcType="TIMESTAMP" property="userUpdateTime" />
+    <result column="USER_REMARK" jdbcType="VARCHAR" property="userRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, USER_NAME, PASS_WORD, USER_CREAT_BY, USER_CREAT_TIME, USER_UPDATE_BY, USER_UPDATE_TIME, 
+    USER_REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wcl.demo.mondel.User">
+    insert into user (USER_ID, USER_NAME, PASS_WORD, 
+      USER_CREAT_BY, USER_CREAT_TIME, USER_UPDATE_BY, 
+      USER_UPDATE_TIME, USER_REMARK)
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
+      #{userCreatBy,jdbcType=INTEGER}, #{userCreatTime,jdbcType=TIMESTAMP}, #{userUpdateBy,jdbcType=INTEGER}, 
+      #{userUpdateTime,jdbcType=TIMESTAMP}, #{userRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wcl.demo.mondel.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="passWord != null">
+        PASS_WORD,
+      </if>
+      <if test="userCreatBy != null">
+        USER_CREAT_BY,
+      </if>
+      <if test="userCreatTime != null">
+        USER_CREAT_TIME,
+      </if>
+      <if test="userUpdateBy != null">
+        USER_UPDATE_BY,
+      </if>
+      <if test="userUpdateTime != null">
+        USER_UPDATE_TIME,
+      </if>
+      <if test="userRemark != null">
+        USER_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreatBy != null">
+        #{userCreatBy,jdbcType=INTEGER},
+      </if>
+      <if test="userCreatTime != null">
+        #{userCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUpdateBy != null">
+        #{userUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="userUpdateTime != null">
+        #{userUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRemark != null">
+        #{userRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wcl.demo.mondel.User">
+    update user
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreatBy != null">
+        USER_CREAT_BY = #{userCreatBy,jdbcType=INTEGER},
+      </if>
+      <if test="userCreatTime != null">
+        USER_CREAT_TIME = #{userCreatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userUpdateBy != null">
+        USER_UPDATE_BY = #{userUpdateBy,jdbcType=INTEGER},
+      </if>
+      <if test="userUpdateTime != null">
+        USER_UPDATE_TIME = #{userUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRemark != null">
+        USER_REMARK = #{userRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wcl.demo.mondel.User">
+    update user
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      USER_CREAT_BY = #{userCreatBy,jdbcType=INTEGER},
+      USER_CREAT_TIME = #{userCreatTime,jdbcType=TIMESTAMP},
+      USER_UPDATE_BY = #{userUpdateBy,jdbcType=INTEGER},
+      USER_UPDATE_TIME = #{userUpdateTime,jdbcType=TIMESTAMP},
+      USER_REMARK = #{userRemark,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>
